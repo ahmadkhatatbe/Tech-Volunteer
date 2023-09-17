@@ -11,6 +11,7 @@ class products extends Model
     use HasFactory;
     protected $table = 'products';
     protected $fillable = [
+        'id',
         'name',
         'breif',
         'description2',
@@ -19,13 +20,23 @@ class products extends Model
         'period',
         'time',
         'image',
-        
-    ];
-    public $timestamps =false;
+        'created_at',
 
-    public function pay()
+    ];
+    public $timestamps = true;
+
+    public function users()
     {
-        return $this->belongsToMany(paypal::class);
+        return $this->belongsToMany(User::class);
 
     }
+    public function volnters()
+    {
+        return $this->hasOne(Volunteer::class);
+    }
+    public function acceptvolnters()
+    {
+        return $this->hasOne(Vaccept::class);
+    }
+    // return $this->belongsToMany(paypal::class);
 }
